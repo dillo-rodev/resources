@@ -1,6 +1,6 @@
-/* =========================
+/* ==================================================
    RESET
-========================= */
+================================================== */
 
 * {
     box-sizing: border-box;
@@ -22,15 +22,14 @@ body {
 }
 
 
-/* =========================
+/* ==================================================
    HEADER
-========================= */
+================================================== */
 
 header {
     height: 73px;
 
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
@@ -39,6 +38,9 @@ header {
     background: #111111;
 
     border-bottom: 1px solid #292929;
+
+    position: relative;
+    z-index: 100;
 }
 
 header h1 {
@@ -54,6 +56,11 @@ header h1 a {
 
     text-decoration: none;
 }
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
 
 nav {
     display: flex;
@@ -76,18 +83,18 @@ nav a:hover {
 }
 
 
-/* =========================
+/* ==================================================
    MAIN
-========================= */
+================================================== */
 
 main {
     width: 100%;
 }
 
 
-/* =========================
+/* ==================================================
    LIBRARY HEADER
-========================= */
+================================================== */
 
 .library-header {
     width: 100%;
@@ -127,12 +134,14 @@ main {
     color: #999999;
 
     font-size: 17px;
+
+    line-height: 1.7;
 }
 
 
-/* =========================
+/* ==================================================
    LIBRARY
-========================= */
+================================================== */
 
 .library {
     width: 100%;
@@ -145,9 +154,9 @@ main {
 }
 
 
-/* =========================
+/* ==================================================
    CATEGORY
-========================= */
+================================================== */
 
 .category {
     margin-bottom: 70px;
@@ -161,6 +170,8 @@ main {
     margin: 0 0 5px;
 
     font-size: 28px;
+
+    line-height: 1.2;
 }
 
 .category-header p {
@@ -172,9 +183,9 @@ main {
 }
 
 
-/* =========================
+/* ==================================================
    RESOURCE GRID
-========================= */
+================================================== */
 
 .resource-grid {
     display: grid;
@@ -186,9 +197,9 @@ main {
 }
 
 
-/* =========================
+/* ==================================================
    RESOURCE CARD
-========================= */
+================================================== */
 
 .resource-card {
     display: flex;
@@ -222,9 +233,9 @@ main {
 }
 
 
-/* =========================
+/* ==================================================
    RESOURCE IMAGE
-========================= */
+================================================== */
 
 .resource-image {
     width: 150px;
@@ -240,15 +251,16 @@ main {
     display: block;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: cover;
 }
 
 
-/* =========================
+/* ==================================================
    RESOURCE INFO
-========================= */
+================================================== */
 
 .resource-info {
     min-width: 0;
@@ -270,6 +282,8 @@ main {
     margin: 6px 0 7px;
 
     font-size: 19px;
+
+    line-height: 1.3;
 }
 
 .resource-info p {
@@ -283,11 +297,552 @@ main {
 }
 
 
-/* =========================
+/* ==================================================
+   DOCUMENTATION PAGE
+================================================== */
+
+
+/* ==================================================
+   DOCUMENTATION LAYOUT
+================================================== */
+
+.documentation-layout {
+    display: grid;
+
+    grid-template-columns:
+        240px
+        minmax(0, 850px)
+        260px;
+
+    justify-content: center;
+
+    min-height: calc(100vh - 73px);
+
+    width: 100%;
+
+    margin: 0 auto;
+}
+
+
+/* ==================================================
+   LEFT DOCUMENTATION SIDEBAR
+================================================== */
+
+.documentation-sidebar {
+    position: sticky;
+
+    top: 0;
+
+    height: calc(100vh - 73px);
+
+    overflow-y: auto;
+
+    padding: 35px 20px;
+
+    border-right: 1px solid #292929;
+}
+
+.sidebar-title {
+    margin-bottom: 18px;
+
+    color: #666666;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* ==================================================
+   DOCUMENTATION NAVIGATION
+================================================== */
+
+.documentation-navigation {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.documentation-navigation a {
+    display: block;
+
+    padding: 6px 10px;
+
+    color: #888888;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    text-decoration: none;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+.documentation-navigation a:hover {
+    color: #eeeeee;
+
+    background: #181818;
+}
+
+
+/* H2 */
+
+.documentation-navigation .heading-2 {
+    padding-left: 10px;
+}
+
+
+/* H3 */
+
+.documentation-navigation .heading-3 {
+    padding-left: 25px;
+
+    color: #777777;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   MAIN DOCUMENTATION
+================================================== */
+
+.documentation-content {
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 70px 70px 120px;
+}
+
+
+/* ==================================================
+   MARKDOWN TYPOGRAPHY
+================================================== */
+
+.documentation-content h1 {
+    margin: 0 0 25px;
+
+    font-size: 42px;
+
+    line-height: 1.2;
+}
+
+.documentation-content h2 {
+    margin-top: 60px;
+
+    margin-bottom: 18px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #292929;
+
+    font-size: 28px;
+
+    line-height: 1.3;
+}
+
+.documentation-content h3 {
+    margin-top: 35px;
+
+    margin-bottom: 12px;
+
+    font-size: 21px;
+
+    line-height: 1.3;
+}
+
+.documentation-content p {
+    margin: 0 0 20px;
+
+    color: #b0b0b0;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+.documentation-content ul,
+.documentation-content ol {
+    margin-top: 0;
+
+    margin-bottom: 25px;
+
+    padding-left: 25px;
+
+    color: #aaaaaa;
+}
+
+.documentation-content li {
+    margin-bottom: 7px;
+}
+
+
+/* ==================================================
+   INLINE CODE
+================================================== */
+
+.documentation-content :not(pre) > code {
+    padding: 2px 5px;
+
+    background: #1b1b1b;
+
+    border: 1px solid #292929;
+
+    border-radius: 4px;
+
+    color: #dddddd;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   CODE BLOCKS
+================================================== */
+
+.documentation-content pre {
+    width: 100%;
+
+    margin: 25px 0;
+
+    overflow-x: auto;
+
+    background: #0b0b0b;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+}
+
+.documentation-content pre code {
+    display: block;
+
+    padding: 20px;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   CODE SCROLLBAR
+================================================== */
+
+.documentation-content pre::-webkit-scrollbar {
+    width: 7px;
+
+    height: 7px;
+}
+
+.documentation-content pre::-webkit-scrollbar-track {
+    background: #0b0b0b;
+}
+
+.documentation-content pre::-webkit-scrollbar-thumb {
+    background: #333333;
+
+    border-radius: 10px;
+}
+
+.documentation-content pre::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+}
+
+
+/* ==================================================
+   TABLES
+================================================== */
+
+.documentation-content table {
+    width: 100%;
+
+    margin: 25px 0;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+.documentation-content th,
+.documentation-content td {
+    padding: 10px 12px;
+
+    text-align: left;
+
+    border: 1px solid #292929;
+}
+
+.documentation-content th {
+    background: #181818;
+
+    color: #eeeeee;
+
+    font-weight: 600;
+}
+
+.documentation-content td {
+    color: #999999;
+}
+
+
+/* ==================================================
+   DOCUMENTATION LINKS
+================================================== */
+
+.documentation-content a {
+    color: #dddddd;
+
+    text-decoration: underline;
+
+    text-decoration-color: #444444;
+
+    text-underline-offset: 3px;
+}
+
+
+/* ==================================================
+   RIGHT INFORMATION PANEL
+================================================== */
+
+.resource-information {
+    position: sticky;
+
+    top: 0;
+
+    height: calc(100vh - 73px);
+
+    overflow-y: auto;
+
+    padding: 35px 25px;
+
+    border-left: 1px solid #292929;
+}
+
+
+/* ==================================================
+   INFORMATION CARD
+================================================== */
+
+.info-card {
+    overflow: hidden;
+
+    background: #181818;
+
+    border: 1px solid #292929;
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   INFORMATION IMAGE
+================================================== */
+
+.info-image {
+    display: block;
+
+    width: 100%;
+
+    height: 160px;
+
+    object-fit: cover;
+}
+
+
+/* ==================================================
+   INFORMATION CONTENT
+================================================== */
+
+.info-content {
+    padding: 20px;
+}
+
+.info-type {
+    color: #777777;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+.info-content h2 {
+    margin: 7px 0 10px;
+
+    font-size: 20px;
+
+    line-height: 1.3;
+}
+
+.info-description {
+    margin: 0 0 20px;
+
+    color: #999999;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   DOWNLOAD BUTTON
+================================================== */
+
+.download-button {
+    display: block;
+
+    width: 100%;
+
+    padding: 10px 15px;
+
+    background: #eeeeee;
+
+    color: #111111 !important;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    text-decoration: none !important;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.download-button:hover {
+    background: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.documentation-loading,
+.information-loading {
+    color: #666666;
+
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   SCROLLBARS
+================================================== */
+
+.documentation-sidebar::-webkit-scrollbar,
+.resource-information::-webkit-scrollbar {
+    width: 6px;
+}
+
+.documentation-sidebar::-webkit-scrollbar-track,
+.resource-information::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+.documentation-sidebar::-webkit-scrollbar-thumb,
+.resource-information::-webkit-scrollbar-thumb {
+    background: #292929;
+
+    border-radius: 10px;
+}
+
+.documentation-sidebar::-webkit-scrollbar-thumb:hover,
+.resource-information::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 1100px) {
+
+    .documentation-layout {
+        grid-template-columns:
+            210px
+            minmax(0, 1fr)
+            230px;
+    }
+
+    .documentation-content {
+        padding: 60px 45px 100px;
+    }
+
+    .resource-information {
+        padding: 30px 18px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL TABLET
+================================================== */
+
+@media (max-width: 900px) {
+
+    .documentation-layout {
+        grid-template-columns:
+            200px
+            minmax(0, 1fr);
+    }
+
+    .resource-information {
+        display: none;
+    }
+
+    .documentation-content {
+        padding: 60px 40px 100px;
+    }
+
+}
+
+
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media (max-width: 700px) {
+
+    /* Header */
 
     header {
         height: auto;
@@ -305,6 +860,9 @@ main {
         gap: 18px;
     }
 
+
+    /* Library */
+
     .library-header {
         padding: 60px 20px 45px;
     }
@@ -313,9 +871,16 @@ main {
         font-size: 40px;
     }
 
+    .library-header > p:last-child {
+        font-size: 15px;
+    }
+
     .library {
         padding: 0 20px 70px;
     }
+
+
+    /* Resource cards */
 
     .resource-grid {
         grid-template-columns: 1fr;
@@ -327,6 +892,57 @@ main {
         min-width: 120px;
 
         height: 120px;
+    }
+
+
+    /* Documentation */
+
+    .documentation-layout {
+        display: block;
+    }
+
+    .documentation-sidebar {
+        position: relative;
+
+        top: auto;
+
+        height: auto;
+
+        max-height: 280px;
+
+        padding: 25px 20px;
+
+        border-right: none;
+
+        border-bottom: 1px solid #292929;
+    }
+
+    .documentation-content {
+        padding: 45px 20px 80px;
+    }
+
+    .documentation-content h1 {
+        font-size: 34px;
+    }
+
+    .documentation-content h2 {
+        margin-top: 45px;
+
+        font-size: 25px;
+    }
+
+    .documentation-content h3 {
+        font-size: 19px;
+    }
+
+    .documentation-content p {
+        font-size: 14px;
+    }
+
+    .documentation-content pre code {
+        padding: 15px;
+
+        font-size: 12px;
     }
 
 }

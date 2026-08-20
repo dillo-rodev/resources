@@ -1,10 +1,5 @@
 // ==================================================
-// RESOURCES SYSTEM
-// ==================================================
-
-
-// ==================================================
-// LOAD RESOURCES JSON
+// LOAD RESOURCES
 // ==================================================
 
 async function loadResources() {
@@ -23,7 +18,7 @@ async function loadResources() {
 
     } catch (error) {
 
-        console.error("Resource loading error:", error);
+        console.error(error);
 
         return [];
 
@@ -41,11 +36,10 @@ async function displayResources() {
     const container =
         document.getElementById("scripting-resources");
 
-    // Not on the resources page
+    // Not on resources.html
     if (!container) {
         return;
     }
-
 
     const resources =
         await loadResources();
@@ -53,15 +47,14 @@ async function displayResources() {
 
     resources.forEach(resource => {
 
-        // Only show scripting resources
         if (resource.category !== "Scripting") {
             return;
         }
 
 
-        // ==================================================
+        // =========================
         // CARD
-        // ==================================================
+        // =========================
 
         const card =
             document.createElement("a");
@@ -73,9 +66,9 @@ async function displayResources() {
             `docs.html?resource=${encodeURIComponent(resource.id)}`;
 
 
-        // ==================================================
+        // =========================
         // IMAGE
-        // ==================================================
+        // =========================
 
         const imageContainer =
             document.createElement("div");
@@ -88,18 +81,18 @@ async function displayResources() {
             document.createElement("img");
 
         image.src =
-            resource.image || "";
+            resource.image;
 
         image.alt =
-            resource.name || "";
+            resource.name;
 
 
         imageContainer.appendChild(image);
 
 
-        // ==================================================
+        // =========================
         // INFO
-        // ==================================================
+        // =========================
 
         const info =
             document.createElement("div");
@@ -115,21 +108,21 @@ async function displayResources() {
             "resource-type";
 
         type.textContent =
-            resource.type || "";
+            resource.type;
 
 
         const title =
             document.createElement("h3");
 
         title.textContent =
-            resource.name || "";
+            resource.name;
 
 
         const description =
             document.createElement("p");
 
         description.textContent =
-            resource.description || "";
+            resource.description;
 
 
         info.appendChild(type);
@@ -137,13 +130,12 @@ async function displayResources() {
         info.appendChild(description);
 
 
-        // ==================================================
-        // ADD TO CARD
-        // ==================================================
+        // =========================
+        // ADD CARD
+        // =========================
 
         card.appendChild(imageContainer);
         card.appendChild(info);
-
 
         container.appendChild(card);
 
@@ -153,7 +145,7 @@ async function displayResources() {
 
 
 // ==================================================
-// DOCUMENTATION
+// LOAD DOCUMENTATION
 // ==================================================
 
 async function loadDocumentation() {
@@ -163,23 +155,17 @@ async function loadDocumentation() {
             "documentation-content"
         );
 
-    // Not on documentation page
+    // Not on docs.html
     if (!content) {
         return;
     }
 
 
-    const navigation =
-        document.getElementById(
-            "documentation-navigation"
-        );
-
-
     try {
 
-        // ==================================================
+        // =========================
         // GET RESOURCE ID
-        // ==================================================
+        // =========================
 
         const params =
             new URLSearchParams(
@@ -192,14 +178,14 @@ async function loadDocumentation() {
 
         if (!resourceId) {
             throw new Error(
-                "No resource ID was provided."
+                "No resource specified."
             );
         }
 
 
-        // ==================================================
+        // =========================
         // LOAD RESOURCES
-        // ==================================================
+        // =========================
 
         const resources =
             await loadResources();
@@ -212,17 +198,15 @@ async function loadDocumentation() {
 
 
         if (!resource) {
-
             throw new Error(
-                `Resource "${resourceId}" was not found.`
+                "Resource not found."
             );
-
         }
 
 
-        // ==================================================
+        // =========================
         // RESOURCE INFORMATION
-        // ==================================================
+        // =========================
 
         const image =
             document.getElementById(
@@ -250,86 +234,68 @@ async function loadDocumentation() {
             );
 
 
-        if (image) {
+        image.src =
+            resource.image;
 
-            image.src =
-                resource.image || "";
-
-            image.alt =
-                resource.name || "";
-
-        }
+        image.alt =
+            resource.name;
 
 
-        if (name) {
-
-            name.textContent =
-                resource.name || "";
-
-        }
+        name.textContent =
+            resource.name;
 
 
-        if (type) {
-
-            type.textContent =
-                resource.type || "";
-
-        }
+        type.textContent =
+            resource.type;
 
 
-        if (description) {
-
-            description.textContent =
-                resource.description || "";
-
-        }
+        description.textContent =
+            resource.description;
 
 
-        // ==================================================
+        // =========================
         // DOWNLOAD
-        // ==================================================
+        // =========================
 
-        if (download) {
+        if (resource.download) {
 
-            if (resource.download) {
+            download.href =
+                resource.download;
 
-                download.href =
-                    resource.download;
+            download.style.display =
+                "block";
 
-                download.style.display =
-                    "block";
+        } else {
 
-            } else {
-
-                download.style.display =
-                    "none";
-
-            }
+            download.style.display =
+                "none";
 
         }
 
 
-        // ==================================================
+        // =========================
         // LOAD MARKDOWN
-        // ==================================================
+        // =========================
 
-        if (!resource.md) {
+        if (!resource.documentation) {
 
             throw new Error(
-                "This resource has no Markdown file."
+                "Documentation path is missing."
             );
 
         }
 
 
         const markdownResponse =
-            await fetch(resource.md);
+            await fetch(
+                resource.documentation
+            );
 
 
         if (!markdownResponse.ok) {
 
             throw new Error(
-                `Could not load Markdown: ${resource.md}`
+                `Could not load ${resource.documentation}`
             );
 
         }
@@ -339,36 +305,26 @@ async function loadDocumentation() {
             await markdownResponse.text();
 
 
-        // ==================================================
+        // =========================
         // RENDER MARKDOWN
-        // ==================================================
-
-        if (typeof marked === "undefined") {
-
-            throw new Error(
-                "Marked.js could not be loaded."
-            );
-
-        }
-
+        // =========================
 
         content.innerHTML =
             marked.parse(markdown);
 
 
-        // ==================================================
-        // CREATE SIDEBAR
-        // ==================================================
+        // =========================
+        // CREATE CONTENTS
+        // =========================
 
         createDocumentationNavigation(
-            content,
-            navigation
+            content
         );
 
 
-        // ==================================================
-        // PRISM
-        // ==================================================
+        // =========================
+        // SYNTAX HIGHLIGHTING
+        // =========================
 
         if (window.Prism) {
 
@@ -387,10 +343,7 @@ async function loadDocumentation() {
 
         content.innerHTML = `
             <h1>Oops.</h1>
-
-            <p>
-                Could not load the documentation.
-            </p>
+            <p>Could not load the documentation.</p>
         `;
 
     }
@@ -399,13 +352,15 @@ async function loadDocumentation() {
 
 
 // ==================================================
-// DOCUMENTATION SIDEBAR
+// CREATE DOCUMENTATION SIDEBAR
 // ==================================================
 
-function createDocumentationNavigation(
-    content,
-    navigation
-) {
+function createDocumentationNavigation(content) {
+
+    const navigation =
+        document.getElementById(
+            "documentation-navigation"
+        );
 
     if (!navigation) {
         return;
@@ -421,67 +376,65 @@ function createDocumentationNavigation(
         );
 
 
-    headings.forEach(
-        (heading, index) => {
+    headings.forEach((heading, index) => {
 
-            // Create ID
+        // =========================
+        // CREATE ID
+        // =========================
 
-            if (!heading.id) {
+        if (!heading.id) {
 
-                heading.id =
-                    `section-${index}`;
-
-            }
-
-
-            // Create link
-
-            const link =
-                document.createElement("a");
-
-
-            link.href =
-                `#${heading.id}`;
-
-
-            link.textContent =
-                heading.textContent;
-
-
-            // Heading level
-
-            if (
-                heading.tagName === "H1"
-            ) {
-
-                link.className =
-                    "heading-1";
-
-            }
-
-            else if (
-                heading.tagName === "H2"
-            ) {
-
-                link.className =
-                    "heading-2";
-
-            }
-
-            else if (
-                heading.tagName === "H3"
-            ) {
-
-                link.className =
-                    "heading-3";
-
-            }
-
-
-            navigation.appendChild(link);
+            heading.id =
+                `section-${index}`;
 
         }
-    );
+
+
+        // =========================
+        // CREATE LINK
+        // =========================
+
+        const link =
+            document.createElement("a");
+
+
+        link.href =
+            `#${heading.id}`;
+
+
+        link.textContent =
+            heading.textContent;
+
+
+        // =========================
+        // HEADING LEVEL
+        // =========================
+
+        if (heading.tagName === "H1") {
+
+            link.className =
+                "heading-1";
+
+        }
+
+        else if (heading.tagName === "H2") {
+
+            link.className =
+                "heading-2";
+
+        }
+
+        else if (heading.tagName === "H3") {
+
+            link.className =
+                "heading-3";
+
+        }
+
+
+        navigation.appendChild(link);
+
+    });
 
 }
 
@@ -491,4 +444,5 @@ function createDocumentationNavigation(
 // ==================================================
 
 displayResources();
+
 loadDocumentation();

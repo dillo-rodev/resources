@@ -1,1 +1,332 @@
+/* =========================
+   RESET
+========================= */
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    background: #111111;
+    color: #eeeeee;
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    height: 73px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 60px;
+
+    background: #111111;
+
+    border-bottom: 1px solid #292929;
+}
+
+header h1 {
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+header h1 a {
+    color: #eeeeee;
+
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+
+    gap: 25px;
+}
+
+nav a {
+    color: #999999;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 100%;
+}
+
+
+/* =========================
+   LIBRARY HEADER
+========================= */
+
+.library-header {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 90px 30px 65px;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+
+    color: #777777;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+}
+
+.library-header h2 {
+    margin: 0 0 15px;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+}
+
+.library-header > p:last-child {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #999999;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   LIBRARY
+========================= */
+
+.library {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 30px 100px;
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.category {
+    margin-bottom: 70px;
+}
+
+.category-header {
+    margin-bottom: 25px;
+}
+
+.category-header h2 {
+    margin: 0 0 5px;
+
+    font-size: 28px;
+}
+
+.category-header p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESOURCE GRID
+========================= */
+
+.resource-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================
+   RESOURCE CARD
+========================= */
+
+.resource-card {
+    display: flex;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #181818;
+
+    border: 1px solid #292929;
+
+    border-radius: 10px;
+
+    color: #eeeeee;
+
+    text-decoration: none;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.resource-card:hover {
+    background: #1d1d1d;
+
+    border-color: #3a3a3a;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================
+   RESOURCE IMAGE
+========================= */
+
+.resource-image {
+    width: 150px;
+
+    min-width: 150px;
+
+    height: 150px;
+
+    overflow: hidden;
+}
+
+.resource-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   RESOURCE INFO
+========================= */
+
+.resource-info {
+    min-width: 0;
+
+    padding: 20px;
+}
+
+.resource-type {
+    color: #777777;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+.resource-info h3 {
+    margin: 6px 0 7px;
+
+    font-size: 19px;
+}
+
+.resource-info p {
+    margin: 0;
+
+    color: #999999;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    header {
+        height: auto;
+
+        padding: 20px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    nav {
+        gap: 18px;
+    }
+
+    .library-header {
+        padding: 60px 20px 45px;
+    }
+
+    .library-header h2 {
+        font-size: 40px;
+    }
+
+    .library {
+        padding: 0 20px 70px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resource-image {
+        width: 120px;
+
+        min-width: 120px;
+
+        height: 120px;
+    }
+
+}

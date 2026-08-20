@@ -1,1 +1,14 @@
-
+{
+    "resources": [
+        {
+            "id": "progression-service",
+            "name": "ProgressionService",
+            "category": "Scripting",
+            "type": "Luau Module",
+            "description": "A modular progression system for managing player EXP, levels, and progression.",
+            "image": "Assets/progression-service.png",
+            "documentation": "Documentations/ProgressionService.md",
+            "download": "Downloads/ProgressionService.rbxm"
+        }
+    ]
+}

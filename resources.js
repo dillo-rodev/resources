@@ -1,5 +1,10 @@
 // ==================================================
-// LOAD RESOURCES
+// RESOURCES SYSTEM
+// ==================================================
+
+
+// ==================================================
+// LOAD RESOURCES JSON
 // ==================================================
 
 async function loadResources() {
@@ -14,19 +19,13 @@ async function loadResources() {
 
         const data = await response.json();
 
-        // If we're on the library page
-        if (document.getElementById("scripting-resources")) {
-            displayResources(data.resources);
-        }
-
-        // If we're on the documentation page
-        if (document.getElementById("documentation-content")) {
-            loadDocumentation(data.resources);
-        }
+        return data.resources;
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Resource loading error:", error);
+
+        return [];
 
     }
 
@@ -34,33 +33,49 @@ async function loadResources() {
 
 
 // ==================================================
-// DISPLAY RESOURCE CARDS
+// RESOURCE LIBRARY
 // ==================================================
 
-function displayResources(resources) {
+async function displayResources() {
 
-    const scriptingContainer =
+    const container =
         document.getElementById("scripting-resources");
+
+    // Not on the resources page
+    if (!container) {
+        return;
+    }
+
+
+    const resources =
+        await loadResources();
 
 
     resources.forEach(resource => {
 
+        // Only show scripting resources
         if (resource.category !== "Scripting") {
             return;
         }
 
 
-        const card = document.createElement("a");
+        // ==================================================
+        // CARD
+        // ==================================================
 
-        card.className = "resource-card";
+        const card =
+            document.createElement("a");
+
+        card.className =
+            "resource-card";
 
         card.href =
             `docs.html?resource=${encodeURIComponent(resource.id)}`;
 
 
-        // =========================
+        // ==================================================
         // IMAGE
-        // =========================
+        // ==================================================
 
         const imageContainer =
             document.createElement("div");
@@ -72,17 +87,19 @@ function displayResources(resources) {
         const image =
             document.createElement("img");
 
-        image.src = resource.image;
+        image.src =
+            resource.image || "";
 
-        image.alt = resource.name;
+        image.alt =
+            resource.name || "";
 
 
         imageContainer.appendChild(image);
 
 
-        // =========================
+        // ==================================================
         // INFO
-        // =========================
+        // ==================================================
 
         const info =
             document.createElement("div");
@@ -98,40 +115,37 @@ function displayResources(resources) {
             "resource-type";
 
         type.textContent =
-            resource.type;
+            resource.type || "";
 
 
         const title =
             document.createElement("h3");
 
         title.textContent =
-            resource.name;
+            resource.name || "";
 
 
         const description =
             document.createElement("p");
 
         description.textContent =
-            resource.description;
+            resource.description || "";
 
 
         info.appendChild(type);
-
         info.appendChild(title);
-
         info.appendChild(description);
 
 
-        // =========================
-        // CARD
-        // =========================
+        // ==================================================
+        // ADD TO CARD
+        // ==================================================
 
         card.appendChild(imageContainer);
-
         card.appendChild(info);
 
 
-        scriptingContainer.appendChild(card);
+        container.appendChild(card);
 
     });
 
@@ -139,185 +153,21 @@ function displayResources(resources) {
 
 
 // ==================================================
-// LOAD DOCUMENTATION
+// DOCUMENTATION
 // ==================================================
 
-async function loadDocumentation(resources) {
-
-    const params =
-        new URLSearchParams(window.location.search);
-
-    const resourceID =
-        params.get("resource");
-
-
-    // No resource specified
-
-    if (!resourceID) {
-
-        showDocumentationError(
-            "No resource was specified."
-        );
-
-        return;
-
-    }
-
-
-    // Find resource
-
-    const resource =
-        resources.find(
-            item => item.id === resourceID
-        );
-
-
-    if (!resource) {
-
-        showDocumentationError(
-            "Resource could not be found."
-        );
-
-        return;
-
-    }
-
-
-    // Load markdown
-
-    try {
-
-        const response =
-            await fetch(resource.documentation);
-
-
-        if (!response.ok) {
-            throw new Error(
-                "Could not load documentation."
-            );
-        }
-
-
-        const markdown =
-            await response.text();
-
-
-        displayDocumentation(
-            markdown,
-            resource
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        showDocumentationError(
-            "Could not load the documentation."
-        );
-
-    }
-
-}
-
-
-// ==================================================
-// DISPLAY DOCUMENTATION
-// ==================================================
-
-function displayDocumentation(
-    markdown,
-    resource
-) {
+async function loadDocumentation() {
 
     const content =
         document.getElementById(
             "documentation-content"
         );
 
-
-    // Convert Markdown → HTML
-
-    content.innerHTML =
-        marked.parse(markdown);
-
-
-    // Add IDs to headings
-
-    const headings =
-        content.querySelectorAll(
-            "h2, h3"
-        );
-
-
-    headings.forEach((heading, index) => {
-
-        const id =
-            createHeadingID(
-                heading.textContent,
-                index
-            );
-
-
-        heading.id = id;
-
-    });
-
-
-    // Create sidebar
-
-    createDocumentationNavigation(
-        headings
-    );
-
-
-    // Create right panel
-
-    createInformationPanel(
-        resource
-    );
-
-
-    // Syntax highlighting
-
-    if (typeof Prism !== "undefined") {
-
-        Prism.highlightAllUnder(content);
-
+    // Not on documentation page
+    if (!content) {
+        return;
     }
 
-}
-
-
-// ==================================================
-// CREATE HEADING ID
-// ==================================================
-
-function createHeadingID(
-    text,
-    index
-) {
-
-    const slug =
-        text
-            .toLowerCase()
-            .trim()
-            .replace(/[^\w\s-]/g, "")
-            .replace(/\s+/g, "-");
-
-
-    return slug || `heading-${index}`;
-
-}
-
-
-// ==================================================
-// CREATE SIDEBAR
-// ==================================================
-
-function createDocumentationNavigation(
-    headings
-) {
 
     const navigation =
         document.getElementById(
@@ -325,216 +175,313 @@ function createDocumentationNavigation(
         );
 
 
-    navigation.innerHTML = "";
+    try {
+
+        // ==================================================
+        // GET RESOURCE ID
+        // ==================================================
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const resourceId =
+            params.get("resource");
 
 
-    headings.forEach(heading => {
-
-        const link =
-            document.createElement("a");
-
-
-        link.href =
-            `#${heading.id}`;
-
-
-        link.textContent =
-            heading.textContent;
-
-
-        // h2 / h3 hierarchy
-
-        if (heading.tagName === "H2") {
-
-            link.className =
-                "heading-2";
-
-        }
-
-        if (heading.tagName === "H3") {
-
-            link.className =
-                "heading-3";
-
+        if (!resourceId) {
+            throw new Error(
+                "No resource ID was provided."
+            );
         }
 
 
-        navigation.appendChild(link);
+        // ==================================================
+        // LOAD RESOURCES
+        // ==================================================
 
-    });
-
-}
-
-
-// ==================================================
-// CREATE INFORMATION PANEL
-// ==================================================
-
-function createInformationPanel(
-    resource
-) {
-
-    const container =
-        document.getElementById(
-            "resource-information"
-        );
+        const resources =
+            await loadResources();
 
 
-    container.innerHTML = "";
+        const resource =
+            resources.find(
+                item => item.id === resourceId
+            );
 
 
-    // Card
+        if (!resource) {
 
-    const card =
-        document.createElement("div");
+            throw new Error(
+                `Resource "${resourceId}" was not found.`
+            );
 
-    card.className =
-        "info-card";
+        }
 
 
-    // =========================
-    // IMAGE
-    // =========================
-
-    if (resource.image) {
+        // ==================================================
+        // RESOURCE INFORMATION
+        // ==================================================
 
         const image =
-            document.createElement("img");
+            document.getElementById(
+                "resource-image"
+            );
 
-        image.className =
-            "info-image";
+        const name =
+            document.getElementById(
+                "resource-name"
+            );
 
-        image.src =
-            resource.image;
+        const type =
+            document.getElementById(
+                "resource-type"
+            );
 
-        image.alt =
-            resource.name;
-
-
-        card.appendChild(image);
-
-    }
-
-
-    // =========================
-    // CONTENT
-    // =========================
-
-    const content =
-        document.createElement("div");
-
-    content.className =
-        "info-content";
-
-
-    // Type
-
-    const type =
-        document.createElement("span");
-
-    type.className =
-        "info-type";
-
-    type.textContent =
-        resource.type;
-
-
-    // Name
-
-    const title =
-        document.createElement("h2");
-
-    title.textContent =
-        resource.name;
-
-
-    // Description
-
-    const description =
-        document.createElement("p");
-
-    description.className =
-        "info-description";
-
-    description.textContent =
-        resource.description;
-
-
-    content.appendChild(type);
-
-    content.appendChild(title);
-
-    content.appendChild(description);
-
-
-    // =========================
-    // DOWNLOAD
-    // =========================
-
-    if (resource.download) {
+        const description =
+            document.getElementById(
+                "resource-description"
+            );
 
         const download =
-            document.createElement("a");
-
-        download.className =
-            "download-button";
-
-        download.href =
-            resource.download;
-
-        download.textContent =
-            "Download";
+            document.getElementById(
+                "resource-download"
+            );
 
 
-        download.setAttribute(
-            "download",
-            ""
+        if (image) {
+
+            image.src =
+                resource.image || "";
+
+            image.alt =
+                resource.name || "";
+
+        }
+
+
+        if (name) {
+
+            name.textContent =
+                resource.name || "";
+
+        }
+
+
+        if (type) {
+
+            type.textContent =
+                resource.type || "";
+
+        }
+
+
+        if (description) {
+
+            description.textContent =
+                resource.description || "";
+
+        }
+
+
+        // ==================================================
+        // DOWNLOAD
+        // ==================================================
+
+        if (download) {
+
+            if (resource.download) {
+
+                download.href =
+                    resource.download;
+
+                download.style.display =
+                    "block";
+
+            } else {
+
+                download.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        // ==================================================
+        // LOAD MARKDOWN
+        // ==================================================
+
+        if (!resource.md) {
+
+            throw new Error(
+                "This resource has no Markdown file."
+            );
+
+        }
+
+
+        const markdownResponse =
+            await fetch(resource.md);
+
+
+        if (!markdownResponse.ok) {
+
+            throw new Error(
+                `Could not load Markdown: ${resource.md}`
+            );
+
+        }
+
+
+        const markdown =
+            await markdownResponse.text();
+
+
+        // ==================================================
+        // RENDER MARKDOWN
+        // ==================================================
+
+        if (typeof marked === "undefined") {
+
+            throw new Error(
+                "Marked.js could not be loaded."
+            );
+
+        }
+
+
+        content.innerHTML =
+            marked.parse(markdown);
+
+
+        // ==================================================
+        // CREATE SIDEBAR
+        // ==================================================
+
+        createDocumentationNavigation(
+            content,
+            navigation
         );
 
 
-        content.appendChild(download);
+        // ==================================================
+        // PRISM
+        // ==================================================
+
+        if (window.Prism) {
+
+            Prism.highlightAll();
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Documentation error:",
+            error
+        );
+
+
+        content.innerHTML = `
+            <h1>Oops.</h1>
+
+            <p>
+                Could not load the documentation.
+            </p>
+        `;
 
     }
-
-
-    card.appendChild(content);
-
-
-    container.appendChild(card);
 
 }
 
 
 // ==================================================
-// DOCUMENTATION ERROR
+// DOCUMENTATION SIDEBAR
 // ==================================================
 
-function showDocumentationError(
-    message
+function createDocumentationNavigation(
+    content,
+    navigation
 ) {
 
-    const content =
-        document.getElementById(
-            "documentation-content"
-        );
-
-
-    if (!content) {
+    if (!navigation) {
         return;
     }
 
 
-    content.innerHTML = `
-        <h1>Oops.</h1>
+    navigation.innerHTML = "";
 
-        <p>
-            ${message}
-        </p>
 
-        <a href="index.html">
-            Return to the library
-        </a>
-    `;
+    const headings =
+        content.querySelectorAll(
+            "h1, h2, h3"
+        );
+
+
+    headings.forEach(
+        (heading, index) => {
+
+            // Create ID
+
+            if (!heading.id) {
+
+                heading.id =
+                    `section-${index}`;
+
+            }
+
+
+            // Create link
+
+            const link =
+                document.createElement("a");
+
+
+            link.href =
+                `#${heading.id}`;
+
+
+            link.textContent =
+                heading.textContent;
+
+
+            // Heading level
+
+            if (
+                heading.tagName === "H1"
+            ) {
+
+                link.className =
+                    "heading-1";
+
+            }
+
+            else if (
+                heading.tagName === "H2"
+            ) {
+
+                link.className =
+                    "heading-2";
+
+            }
+
+            else if (
+                heading.tagName === "H3"
+            ) {
+
+                link.className =
+                    "heading-3";
+
+            }
+
+
+            navigation.appendChild(link);
+
+        }
+    );
 
 }
 
@@ -543,4 +490,5 @@ function showDocumentationError(
 // START
 // ==================================================
 
-loadResources();
+displayResources();
+loadDocumentation();

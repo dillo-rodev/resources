@@ -8,7 +8,7 @@
             "description": "A modular progression system for managing player EXP, levels, and progression.",
             "image": "Assets/progression-service.png",
             "documentation": "Documentations/ProgressionService.md",
-            "download": "Downloads/ProgressionService.rbxm"
+            "download": "Downloads/ProgressionService.luau"
         }
     ]
 }

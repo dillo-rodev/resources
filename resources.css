@@ -298,11 +298,6 @@ main {
 
 
 /* ==================================================
-   DOCUMENTATION PAGE
-================================================== */
-
-
-/* ==================================================
    DOCUMENTATION LAYOUT
 ================================================== */
 
@@ -311,16 +306,12 @@ main {
 
     grid-template-columns:
         240px
-        minmax(0, 850px)
-        260px;
-
-    justify-content: center;
-
-    min-height: calc(100vh - 73px);
+        minmax(0, 1fr)
+        330px;
 
     width: 100%;
 
-    margin: 0 auto;
+    min-height: calc(100vh - 73px);
 }
 
 
@@ -337,7 +328,7 @@ main {
 
     overflow-y: auto;
 
-    padding: 35px 20px;
+    padding: 40px 22px;
 
     border-right: 1px solid #292929;
 }
@@ -370,7 +361,7 @@ main {
 .documentation-navigation a {
     display: block;
 
-    padding: 6px 10px;
+    padding: 7px 10px;
 
     color: #888888;
 
@@ -393,18 +384,12 @@ main {
     background: #181818;
 }
 
-
-/* H2 */
-
 .documentation-navigation .heading-2 {
     padding-left: 10px;
 }
 
-
-/* H3 */
-
 .documentation-navigation .heading-3 {
-    padding-left: 25px;
+    padding-left: 27px;
 
     color: #777777;
 
@@ -413,7 +398,7 @@ main {
 
 
 /* ==================================================
-   MAIN DOCUMENTATION
+   DOCUMENTATION CONTENT
 ================================================== */
 
 .documentation-content {
@@ -421,7 +406,7 @@ main {
 
     min-width: 0;
 
-    padding: 70px 70px 120px;
+    padding: 70px 75px 120px;
 }
 
 
@@ -552,31 +537,6 @@ main {
 
 
 /* ==================================================
-   CODE SCROLLBAR
-================================================== */
-
-.documentation-content pre::-webkit-scrollbar {
-    width: 7px;
-
-    height: 7px;
-}
-
-.documentation-content pre::-webkit-scrollbar-track {
-    background: #0b0b0b;
-}
-
-.documentation-content pre::-webkit-scrollbar-thumb {
-    background: #333333;
-
-    border-radius: 10px;
-}
-
-.documentation-content pre::-webkit-scrollbar-thumb:hover {
-    background: #444444;
-}
-
-
-/* ==================================================
    TABLES
 ================================================== */
 
@@ -640,7 +600,7 @@ main {
 
     overflow-y: auto;
 
-    padding: 35px 25px;
+    padding: 40px 28px;
 
     border-left: 1px solid #292929;
 }
@@ -651,6 +611,8 @@ main {
 ================================================== */
 
 .info-card {
+    width: 100%;
+
     overflow: hidden;
 
     background: #181818;
@@ -670,7 +632,7 @@ main {
 
     width: 100%;
 
-    height: 160px;
+    height: 220px;
 
     object-fit: cover;
 }
@@ -681,7 +643,7 @@ main {
 ================================================== */
 
 .info-content {
-    padding: 20px;
+    padding: 24px;
 }
 
 .info-type {
@@ -691,25 +653,25 @@ main {
 
     font-weight: 600;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
 }
 
 .info-content h2 {
-    margin: 7px 0 10px;
+    margin: 8px 0 12px;
 
-    font-size: 20px;
+    font-size: 23px;
 
     line-height: 1.3;
 }
 
 .info-description {
-    margin: 0 0 20px;
+    margin: 0 0 24px;
 
     color: #999999;
 
-    font-size: 13px;
+    font-size: 14px;
 
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 
@@ -722,7 +684,7 @@ main {
 
     width: 100%;
 
-    padding: 10px 15px;
+    padding: 11px 15px;
 
     background: #eeeeee;
 
@@ -751,40 +713,34 @@ main {
 
 
 /* ==================================================
-   LOADING
-================================================== */
-
-.documentation-loading,
-.information-loading {
-    color: #666666;
-
-    font-size: 13px;
-}
-
-
-/* ==================================================
    SCROLLBARS
 ================================================== */
 
 .documentation-sidebar::-webkit-scrollbar,
-.resource-information::-webkit-scrollbar {
+.resource-information::-webkit-scrollbar,
+.documentation-content pre::-webkit-scrollbar {
     width: 6px;
+
+    height: 6px;
 }
 
 .documentation-sidebar::-webkit-scrollbar-track,
-.resource-information::-webkit-scrollbar-track {
+.resource-information::-webkit-scrollbar-track,
+.documentation-content pre::-webkit-scrollbar-track {
     background: #111111;
 }
 
 .documentation-sidebar::-webkit-scrollbar-thumb,
-.resource-information::-webkit-scrollbar-thumb {
+.resource-information::-webkit-scrollbar-thumb,
+.documentation-content pre::-webkit-scrollbar-thumb {
     background: #292929;
 
     border-radius: 10px;
 }
 
 .documentation-sidebar::-webkit-scrollbar-thumb:hover,
-.resource-information::-webkit-scrollbar-thumb:hover {
+.resource-information::-webkit-scrollbar-thumb:hover,
+.documentation-content pre::-webkit-scrollbar-thumb:hover {
     background: #3a3a3a;
 }
 
@@ -793,21 +749,25 @@ main {
    TABLET
 ================================================== */
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
 
     .documentation-layout {
         grid-template-columns:
-            210px
+            220px
             minmax(0, 1fr)
-            230px;
+            300px;
     }
 
     .documentation-content {
-        padding: 60px 45px 100px;
+        padding: 60px 50px 100px;
     }
 
     .resource-information {
-        padding: 30px 18px;
+        padding: 35px 22px;
+    }
+
+    .info-image {
+        height: 200px;
     }
 
 }
@@ -817,11 +777,11 @@ main {
    SMALL TABLET
 ================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
 
     .documentation-layout {
         grid-template-columns:
-            200px
+            210px
             minmax(0, 1fr);
     }
 
@@ -830,7 +790,7 @@ main {
     }
 
     .documentation-content {
-        padding: 60px 40px 100px;
+        padding: 60px 45px 100px;
     }
 
 }

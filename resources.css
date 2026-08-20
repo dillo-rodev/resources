@@ -686,9 +686,8 @@ main {
 
     padding: 11px 15px;
 
-    background: #eeeeee;
-
-    color: #111111 !important;
+    background: #15803d;
+    color: white !important;
 
     border-radius: 6px;
 
@@ -706,7 +705,7 @@ main {
 }
 
 .download-button:hover {
-    background: #ffffff;
+    background: #16a34a;
 
     transform: translateY(-1px);
 }

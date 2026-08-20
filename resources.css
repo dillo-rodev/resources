@@ -743,6 +743,113 @@ main {
     background: #3a3a3a;
 }
 
+/* ==================================================
+   ADSENSE AD
+================================================== */
+
+.ad-container {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 300px;
+    min-height: 100px;
+
+    padding: 10px;
+
+    z-index: 500;
+
+    background: #181818;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==================================================
+   AD LABEL
+================================================== */
+
+.ad-container::before {
+    content: "Advertisement";
+
+    position: absolute;
+
+    top: 4px;
+    left: 8px;
+
+    color: #555555;
+
+    font-size: 9px;
+
+    pointer-events: none;
+}
+
+
+/* ==================================================
+   ADSENSE RESPONSIVE AREA
+================================================== */
+
+.ad-container ins.adsbygoogle {
+    display: block;
+
+    width: 100%;
+
+    min-height: 90px;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 950px) {
+
+    .ad-container {
+        right: 15px;
+
+        bottom: 15px;
+
+        width: 280px;
+
+        min-height: 100px;
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .ad-container {
+        right: 10px;
+
+        bottom: 10px;
+
+        width: calc(100% - 20px);
+
+        min-height: 90px;
+
+        padding: 8px;
+    }
+
+    .ad-container ins.adsbygoogle {
+        min-height: 70px;
+    }
+
+}
+
 
 /* ==================================================
    TABLET

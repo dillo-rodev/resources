@@ -1,3 +1,4 @@
+```css
 /* ==================================================
    RESET
 ================================================== */
@@ -47,13 +48,11 @@ header h1 {
     margin: 0;
 
     font-size: 22px;
-
     font-weight: 600;
 }
 
 header h1 a {
     color: #eeeeee;
-
     text-decoration: none;
 }
 
@@ -64,7 +63,6 @@ header h1 a {
 
 nav {
     display: flex;
-
     gap: 25px;
 }
 
@@ -98,7 +96,6 @@ main {
 
 .library-header {
     width: 100%;
-
     max-width: 1100px;
 
     margin: 0 auto;
@@ -112,7 +109,6 @@ main {
     color: #777777;
 
     font-size: 11px;
-
     font-weight: 600;
 
     letter-spacing: 1.5px;
@@ -122,7 +118,6 @@ main {
     margin: 0 0 15px;
 
     font-size: 48px;
-
     line-height: 1.1;
 }
 
@@ -134,7 +129,6 @@ main {
     color: #999999;
 
     font-size: 17px;
-
     line-height: 1.7;
 }
 
@@ -145,7 +139,6 @@ main {
 
 .library {
     width: 100%;
-
     max-width: 1100px;
 
     margin: 0 auto;
@@ -170,7 +163,6 @@ main {
     margin: 0 0 5px;
 
     font-size: 28px;
-
     line-height: 1.2;
 }
 
@@ -211,7 +203,6 @@ main {
     background: #181818;
 
     border: 1px solid #292929;
-
     border-radius: 10px;
 
     color: #eeeeee;
@@ -239,7 +230,6 @@ main {
 
 .resource-image {
     width: 150px;
-
     min-width: 150px;
 
     height: 150px;
@@ -251,7 +241,6 @@ main {
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -272,7 +261,6 @@ main {
     color: #777777;
 
     font-size: 10px;
-
     font-weight: 600;
 
     letter-spacing: 1px;
@@ -282,7 +270,6 @@ main {
     margin: 6px 0 7px;
 
     font-size: 19px;
-
     line-height: 1.3;
 }
 
@@ -292,7 +279,6 @@ main {
     color: #999999;
 
     font-size: 13px;
-
     line-height: 1.5;
 }
 
@@ -339,7 +325,6 @@ main {
     color: #666666;
 
     font-size: 10px;
-
     font-weight: 600;
 
     letter-spacing: 1.5px;
@@ -368,7 +353,6 @@ main {
     border-radius: 5px;
 
     font-size: 13px;
-
     line-height: 1.4;
 
     text-decoration: none;
@@ -403,7 +387,6 @@ main {
 
 .documentation-content {
     width: 100%;
-
     min-width: 0;
 
     padding: 70px 75px 120px;
@@ -418,13 +401,11 @@ main {
     margin: 0 0 25px;
 
     font-size: 42px;
-
     line-height: 1.2;
 }
 
 .documentation-content h2 {
     margin-top: 60px;
-
     margin-bottom: 18px;
 
     padding-top: 20px;
@@ -432,17 +413,14 @@ main {
     border-top: 1px solid #292929;
 
     font-size: 28px;
-
     line-height: 1.3;
 }
 
 .documentation-content h3 {
     margin-top: 35px;
-
     margin-bottom: 12px;
 
     font-size: 21px;
-
     line-height: 1.3;
 }
 
@@ -452,14 +430,12 @@ main {
     color: #b0b0b0;
 
     font-size: 15px;
-
     line-height: 1.8;
 }
 
 .documentation-content ul,
 .documentation-content ol {
     margin-top: 0;
-
     margin-bottom: 25px;
 
     padding-left: 25px;
@@ -482,7 +458,6 @@ main {
     background: #1b1b1b;
 
     border: 1px solid #292929;
-
     border-radius: 4px;
 
     color: #dddddd;
@@ -510,7 +485,6 @@ main {
     background: #0b0b0b;
 
     border: 1px solid #292929;
-
     border-radius: 8px;
 }
 
@@ -522,7 +496,6 @@ main {
     background: transparent;
 
     border: none;
-
     border-radius: 0;
 
     font-family:
@@ -531,7 +504,6 @@ main {
         monospace;
 
     font-size: 13px;
-
     line-height: 1.6;
 }
 
@@ -618,7 +590,6 @@ main {
     background: #181818;
 
     border: 1px solid #292929;
-
     border-radius: 10px;
 }
 
@@ -650,7 +621,6 @@ main {
     color: #777777;
 
     font-size: 10px;
-
     font-weight: 600;
 
     letter-spacing: 1.2px;
@@ -660,7 +630,6 @@ main {
     margin: 8px 0 12px;
 
     font-size: 23px;
-
     line-height: 1.3;
 }
 
@@ -670,7 +639,6 @@ main {
     color: #999999;
 
     font-size: 14px;
-
     line-height: 1.7;
 }
 
@@ -687,12 +655,12 @@ main {
     padding: 11px 15px;
 
     background: #15803d;
+
     color: white !important;
 
     border-radius: 6px;
 
     font-size: 13px;
-
     font-weight: 600;
 
     text-align: center;
@@ -719,7 +687,6 @@ main {
 .resource-information::-webkit-scrollbar,
 .documentation-content pre::-webkit-scrollbar {
     width: 6px;
-
     height: 6px;
 }
 
@@ -743,8 +710,9 @@ main {
     background: #3a3a3a;
 }
 
+
 /* ==================================================
-   ADSENSE AD
+   ADSENSE
 ================================================== */
 
 .ad-container {
@@ -754,16 +722,15 @@ main {
     bottom: 20px;
 
     width: 300px;
-    min-height: 100px;
+    height: 250px;
 
-    padding: 10px;
+    padding: 0;
 
     z-index: 500;
 
     background: #181818;
 
     border: 1px solid #292929;
-
     border-radius: 8px;
 
     overflow: hidden;
@@ -774,80 +741,13 @@ main {
 }
 
 
-/* ==================================================
-   AD LABEL
-================================================== */
+/* Actual Google Ad */
 
-.ad-container::before {
-    content: "Advertisement";
+.ad-container .adsbygoogle {
+    display: inline-block;
 
-    position: absolute;
-
-    top: 4px;
-    left: 8px;
-
-    color: #555555;
-
-    font-size: 9px;
-
-    pointer-events: none;
-}
-
-
-/* ==================================================
-   ADSENSE RESPONSIVE AREA
-================================================== */
-
-.ad-container ins.adsbygoogle {
-    display: block;
-
-    width: 100%;
-
-    min-height: 90px;
-}
-
-
-/* ==================================================
-   TABLET
-================================================== */
-
-@media (max-width: 950px) {
-
-    .ad-container {
-        right: 15px;
-
-        bottom: 15px;
-
-        width: 280px;
-
-        min-height: 100px;
-    }
-
-}
-
-
-/* ==================================================
-   MOBILE
-================================================== */
-
-@media (max-width: 700px) {
-
-    .ad-container {
-        right: 10px;
-
-        bottom: 10px;
-
-        width: calc(100% - 20px);
-
-        min-height: 90px;
-
-        padding: 8px;
-    }
-
-    .ad-container ins.adsbygoogle {
-        min-height: 70px;
-    }
-
+    width: 300px;
+    height: 250px;
 }
 
 
@@ -897,6 +797,12 @@ main {
 
     .documentation-content {
         padding: 60px 45px 100px;
+    }
+
+    /* Hide floating ad on smaller screens */
+
+    .ad-container {
+        display: none;
     }
 
 }
@@ -954,7 +860,6 @@ main {
 
     .resource-image {
         width: 120px;
-
         min-width: 120px;
 
         height: 120px;
@@ -1012,3 +917,4 @@ main {
     }
 
 }
+```
